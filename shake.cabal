@@ -1,3 +1,7 @@
+-- This file has been generated from package.yaml by hpack version 0.5.1.
+--
+-- see: https://github.com/sol/hpack
+
 cabal-version:      >= 1.10
 build-type:         Simple
 name:               shake
@@ -30,10 +34,6 @@ description:        Shake is a Haskell library for writing build systems - desig
                     (e.g. compiler version).
 homepage:           http://shakebuild.com
 bug-reports:        https://github.com/ndmitchell/shake/issues
-tested-with:        GHC==7.10.1, GHC==7.8.4, GHC==7.6.3, GHC==7.4.2, GHC==7.2.2
-extra-doc-files:
-    CHANGES.txt
-    README.md
 
 extra-source-files:
     docs/Manual.md
@@ -98,10 +98,6 @@ source-repository head
     type: git
     location: https://github.com/ndmitchell/shake
 
-flag portable
-    default: False
-    description: Obtain FileTime using portable functions
-
 library
     hs-source-dirs:
         src
@@ -123,13 +119,6 @@ library
         transformers >= 0.2,
         extra >= 1.3,
         deepseq >= 1.1
-
-    if flag(portable)
-        cpp-options: -DPORTABLE
-    else
-        if !os(windows)
-            build-depends: unix >= 2.5.1
-
     exposed-modules:
         Development.Shake
         Development.Shake.Classes
@@ -139,6 +128,12 @@ library
         Development.Shake.Rule
         Development.Shake.Util
     other-modules:
+        Development.Make.All
+        Development.Make.Env
+        Development.Make.Parse
+        Development.Make.Rules
+        Development.Make.Type
+        Development.Ninja.All
         Development.Ninja.Env
         Development.Ninja.Lexer
         Development.Ninja.Parse
@@ -178,7 +173,45 @@ library
         General.String
         General.Template
         General.Timing
-        Paths_shake
+        Paths
+        Run
+        Test
+        Test.Assume
+        Test.Basic
+        Test.Benchmark
+        Test.C
+        Test.Cache
+        Test.Command
+        Test.Config
+        Test.Digest
+        Test.Directory
+        Test.Docs
+        Test.Errors
+        Test.FilePath
+        Test.FilePattern
+        Test.Files
+        Test.Journal
+        Test.Lint
+        Test.Live
+        Test.Makefile
+        Test.Manual
+        Test.Monad
+        Test.Ninja
+        Test.Oracle
+        Test.OrderOnly
+        Test.Pool
+        Test.Progress
+        Test.Random
+        Test.Resources
+        Test.Self
+        Test.Tar
+        Test.Throttle
+        Test.Tup
+        Test.Type
+        Test.Unicode
+        Test.Util
+        Test.Verbosity
+        Test.Version
     default-language: Haskell2010
 
 executable shake
@@ -186,11 +219,6 @@ executable shake
     hs-source-dirs:
         src
     ghc-options: -main-is Run.main -threaded -rtsopts
-    if impl(ghc >= 7.4)
-        ghc-options: "-with-rtsopts=-I0 -qg -qb"
-    else
-        -- -qg/-qb segfaults in GHC 7.2
-        ghc-options: -with-rtsopts=-I0
     build-depends:
         base == 4.*,
         old-time,
@@ -209,13 +237,6 @@ executable shake
         transformers >= 0.2,
         extra >= 1.3,
         deepseq >= 1.1
-
-    if flag(portable)
-        cpp-options: -DPORTABLE
-    else
-        if !os(windows)
-            build-depends: unix >= 2.5.1
-
     other-modules:
         Development.Make.All
         Development.Make.Env
@@ -223,7 +244,90 @@ executable shake
         Development.Make.Rules
         Development.Make.Type
         Development.Ninja.All
-        Run
+        Development.Ninja.Env
+        Development.Ninja.Lexer
+        Development.Ninja.Parse
+        Development.Ninja.Type
+        Development.Shake
+        Development.Shake.Args
+        Development.Shake.ByteString
+        Development.Shake.Classes
+        Development.Shake.Command
+        Development.Shake.Config
+        Development.Shake.Core
+        Development.Shake.Database
+        Development.Shake.Demo
+        Development.Shake.Derived
+        Development.Shake.Errors
+        Development.Shake.FileInfo
+        Development.Shake.FilePath
+        Development.Shake.FilePattern
+        Development.Shake.Monad
+        Development.Shake.Pool
+        Development.Shake.Profile
+        Development.Shake.Progress
+        Development.Shake.Resource
+        Development.Shake.Rule
+        Development.Shake.Rules.Directory
+        Development.Shake.Rules.File
+        Development.Shake.Rules.Files
+        Development.Shake.Rules.Oracle
+        Development.Shake.Rules.OrderOnly
+        Development.Shake.Rules.Rerun
+        Development.Shake.Shake
+        Development.Shake.Special
+        Development.Shake.Storage
+        Development.Shake.Types
+        Development.Shake.Util
+        Development.Shake.Value
+        General.Bilist
+        General.Binary
+        General.Cleanup
+        General.Concurrent
+        General.Extra
+        General.Intern
+        General.Process
+        General.String
+        General.Template
+        General.Timing
+        Paths
+        Test
+        Test.Assume
+        Test.Basic
+        Test.Benchmark
+        Test.C
+        Test.Cache
+        Test.Command
+        Test.Config
+        Test.Digest
+        Test.Directory
+        Test.Docs
+        Test.Errors
+        Test.FilePath
+        Test.FilePattern
+        Test.Files
+        Test.Journal
+        Test.Lint
+        Test.Live
+        Test.Makefile
+        Test.Manual
+        Test.Monad
+        Test.Ninja
+        Test.Oracle
+        Test.OrderOnly
+        Test.Pool
+        Test.Progress
+        Test.Random
+        Test.Resources
+        Test.Self
+        Test.Tar
+        Test.Throttle
+        Test.Tup
+        Test.Type
+        Test.Unicode
+        Test.Util
+        Test.Verbosity
+        Test.Version
     default-language: Haskell2010
 
 test-suite shake-test
@@ -251,13 +355,6 @@ test-suite shake-test
         extra >= 1.3,
         deepseq >= 1.1,
         QuickCheck >= 2.0
-
-    if flag(portable)
-        cpp-options: -DPORTABLE
-    else
-        if !os(windows)
-            build-depends: unix >= 2.5.1
-
     other-modules:
         Development.Make.All
         Development.Make.Env
@@ -265,8 +362,53 @@ test-suite shake-test
         Development.Make.Rules
         Development.Make.Type
         Development.Ninja.All
+        Development.Ninja.Env
+        Development.Ninja.Lexer
         Development.Ninja.Parse
         Development.Ninja.Type
+        Development.Shake
+        Development.Shake.Args
+        Development.Shake.ByteString
+        Development.Shake.Classes
+        Development.Shake.Command
+        Development.Shake.Config
+        Development.Shake.Core
+        Development.Shake.Database
+        Development.Shake.Demo
+        Development.Shake.Derived
+        Development.Shake.Errors
+        Development.Shake.FileInfo
+        Development.Shake.FilePath
+        Development.Shake.FilePattern
+        Development.Shake.Monad
+        Development.Shake.Pool
+        Development.Shake.Profile
+        Development.Shake.Progress
+        Development.Shake.Resource
+        Development.Shake.Rule
+        Development.Shake.Rules.Directory
+        Development.Shake.Rules.File
+        Development.Shake.Rules.Files
+        Development.Shake.Rules.Oracle
+        Development.Shake.Rules.OrderOnly
+        Development.Shake.Rules.Rerun
+        Development.Shake.Shake
+        Development.Shake.Special
+        Development.Shake.Storage
+        Development.Shake.Types
+        Development.Shake.Util
+        Development.Shake.Value
+        General.Bilist
+        General.Binary
+        General.Cleanup
+        General.Concurrent
+        General.Extra
+        General.Intern
+        General.Process
+        General.String
+        General.Template
+        General.Timing
+        Paths
         Run
         Test.Assume
         Test.Basic

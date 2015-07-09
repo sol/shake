@@ -1,0 +1,107 @@
+name:               shake
+version:            0.15.4
+license:            BSD3
+category:           Development, Shake
+author:             Neil Mitchell <ndmitchell@gmail.com>
+maintainer:         Neil Mitchell <ndmitchell@gmail.com>
+copyright:          Neil Mitchell 2011-2015
+synopsis:           Build system library, like Make, but more accurate dependencies.
+description: |
+    Shake is a Haskell library for writing build systems - designed as a
+    replacement for @make@. See "Development.Shake" for an introduction,
+    including an example. Further examples are included in the Cabal tarball,
+    under the @Examples@ directory. The homepage contains links to a user
+    manual, an academic paper and further information:
+    <http://shakebuild.com>
+
+    To use Shake the user writes a Haskell program
+    that imports "Development.Shake", defines some build rules, and calls
+    the 'Development.Shake.shakeArgs' function. Thanks to do notation and infix
+    operators, a simple Shake build system
+    is not too dissimilar from a simple Makefile. However, as build systems
+    get more complex, Shake is able to take advantage of the excellent
+    abstraction facilities offered by Haskell and easily support much larger
+    projects. The Shake library provides all the standard features available in other
+    build systems, including automatic parallelism and minimal rebuilds.
+    Shake also provides more accurate dependency tracking, including seamless
+    support for generated files, and dependencies on system information
+    (e.g. compiler version).
+homepage:           http://shakebuild.com
+
+github: ndmitchell/shake
+
+extra-source-files:
+  - docs/Manual.md
+  - docs/Ninja.md
+  - docs/Why.md
+  - docs/shake-progress.png
+  - src/**/*.c
+  - src/**/*.h
+  - src/**/*.ninja
+  - src/**/*.output
+  - src/**/*.prog
+  - src/**/*.cfg
+  - src/Paths.hs
+  - src/Test/MakeTutor/Makefile
+  - src/Test/Tar/list.txt
+
+data-files:
+  - docs/manual/build.bat
+  - docs/manual/Build.hs
+  - docs/manual/build.sh
+  - docs/manual/constants.c
+  - docs/manual/constants.h
+  - docs/manual/main.c
+  - html/profile.html
+  - html/progress.html
+  - html/shake-logic.js
+  - html/shake-progress.js
+  - html/shake-ui.js
+  - html/shake-util.js
+  - html/viz.js
+
+dependencies:
+  - base == 4.*
+  - old-time
+  - directory
+  - hashable >= 1.1.2.3
+  - binary
+  - filepath
+  - process >= 1.1
+  - unordered-containers >= 0.2.1
+  - bytestring
+  - utf8-string >= 0.3
+  - time
+  - random
+  - js-jquery
+  - js-flot
+  - transformers >= 0.2
+  - extra >= 1.3
+  - deepseq >= 1.1
+
+source-dirs: src
+
+library:
+  exposed-modules:
+    - Development.Shake
+    - Development.Shake.Classes
+    - Development.Shake.Command
+    - Development.Shake.Config
+    - Development.Shake.FilePath
+    - Development.Shake.Rule
+    - Development.Shake.Util
+
+executables:
+  shake:
+    main: Run.hs
+    ghc-options:
+      - -main-is Run.main
+      - -threaded -rtsopts
+
+tests:
+  shake-test:
+    main: Test.hs
+    ghc-options:
+      - -main-is Test.main
+      - -threaded -rtsopts
+    dependencies: QuickCheck >= 2.0
