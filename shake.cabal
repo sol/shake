@@ -36,28 +36,28 @@ extra-doc-files:
     README.md
 
 extra-source-files:
+    docs/Manual.md
+    docs/Ninja.md
+    docs/shake-progress.png
+    docs/Why.md
+    src/Paths.hs
     src/Test/C/constants.c
     src/Test/C/constants.h
     src/Test/C/main.c
-    src/Test/MakeTutor/Makefile
     src/Test/MakeTutor/hellofunc.c
     src/Test/MakeTutor/hellomake.c
     src/Test/MakeTutor/hellomake.h
-    src/Test/Tar/list.txt
+    src/Test/MakeTutor/Makefile
     src/Test/Ninja/*.ninja
-    src/Test/Ninja/subdir/*.ninja
     src/Test/Ninja/*.output
+    src/Test/Ninja/subdir/*.ninja
     src/Test/Progress/*.prog
+    src/Test/Tar/list.txt
     src/Test/Tup/hello.c
-    src/Test/Tup/root.cfg
     src/Test/Tup/newmath/root.cfg
     src/Test/Tup/newmath/square.c
     src/Test/Tup/newmath/square.h
-    src/Paths.hs
-    docs/Manual.md
-    docs/Ninja.md
-    docs/Why.md
-    docs/shake-progress.png
+    src/Test/Tup/root.cfg
 
 data-files:
     docs/manual/build.bat
