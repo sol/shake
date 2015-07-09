@@ -9,32 +9,32 @@ author:             Neil Mitchell <ndmitchell@gmail.com>
 maintainer:         Neil Mitchell <ndmitchell@gmail.com>
 copyright:          Neil Mitchell 2011-2015
 synopsis:           Build system library, like Make, but more accurate dependencies.
-description:
-    Shake is a Haskell library for writing build systems - designed as a
-    replacement for @make@. See "Development.Shake" for an introduction,
-    including an example. Further examples are included in the Cabal tarball,
-    under the @Examples@ directory. The homepage contains links to a user
-    manual, an academic paper and further information:
-    <http://shakebuild.com>
-    .
-    To use Shake the user writes a Haskell program
-    that imports "Development.Shake", defines some build rules, and calls
-    the 'Development.Shake.shakeArgs' function. Thanks to do notation and infix
-    operators, a simple Shake build system
-    is not too dissimilar from a simple Makefile. However, as build systems
-    get more complex, Shake is able to take advantage of the excellent
-    abstraction facilities offered by Haskell and easily support much larger
-    projects. The Shake library provides all the standard features available in other
-    build systems, including automatic parallelism and minimal rebuilds.
-    Shake also provides more accurate dependency tracking, including seamless
-    support for generated files, and dependencies on system information
-    (e.g. compiler version).
+description:        Shake is a Haskell library for writing build systems - designed as a
+                    replacement for @make@. See "Development.Shake" for an introduction,
+                    including an example. Further examples are included in the Cabal tarball,
+                    under the @Examples@ directory. The homepage contains links to a user
+                    manual, an academic paper and further information:
+                    <http://shakebuild.com>
+                    .
+                    To use Shake the user writes a Haskell program
+                    that imports "Development.Shake", defines some build rules, and calls
+                    the 'Development.Shake.shakeArgs' function. Thanks to do notation and infix
+                    operators, a simple Shake build system
+                    is not too dissimilar from a simple Makefile. However, as build systems
+                    get more complex, Shake is able to take advantage of the excellent
+                    abstraction facilities offered by Haskell and easily support much larger
+                    projects. The Shake library provides all the standard features available in other
+                    build systems, including automatic parallelism and minimal rebuilds.
+                    Shake also provides more accurate dependency tracking, including seamless
+                    support for generated files, and dependencies on system information
+                    (e.g. compiler version).
 homepage:           http://shakebuild.com
 bug-reports:        https://github.com/ndmitchell/shake/issues
 tested-with:        GHC==7.10.1, GHC==7.8.4, GHC==7.6.3, GHC==7.4.2, GHC==7.2.2
 extra-doc-files:
     CHANGES.txt
     README.md
+
 extra-source-files:
     src/Test/C/constants.c
     src/Test/C/constants.h
@@ -60,31 +60,31 @@ extra-source-files:
     docs/shake-progress.png
 
 data-files:
-    html/viz.js
-    html/profile.html
-    html/progress.html
-    html/shake-logic.js
-    html/shake-progress.js
-    html/shake-ui.js
-    html/shake-util.js
     docs/manual/build.bat
     docs/manual/Build.hs
     docs/manual/build.sh
     docs/manual/constants.c
     docs/manual/constants.h
     docs/manual/main.c
+    html/profile.html
+    html/progress.html
+    html/shake-logic.js
+    html/shake-progress.js
+    html/shake-ui.js
+    html/shake-util.js
+    html/viz.js
 
 source-repository head
-    type:     git
-    location: https://github.com/ndmitchell/shake.git
+    type: git
+    location: https://github.com/ndmitchell/shake
 
 flag portable
     default: False
     description: Obtain FileTime using portable functions
 
 library
-    default-language: Haskell2010
-    hs-source-dirs:   src
+    hs-source-dirs:
+        src
     build-depends:
         base == 4.*,
         old-time,
@@ -118,7 +118,6 @@ library
         Development.Shake.FilePath
         Development.Shake.Rule
         Development.Shake.Util
-
     other-modules:
         Development.Ninja.Env
         Development.Ninja.Lexer
@@ -160,14 +159,13 @@ library
         General.Template
         General.Timing
         Paths_shake
-
+    default-language: Haskell2010
 
 executable shake
-    default-language: Haskell2010
-    hs-source-dirs:   src
-    ghc-options: -main-is Run.main
     main-is: Run.hs
-    ghc-options: -threaded -rtsopts
+    hs-source-dirs:
+        src
+    ghc-options: -main-is Run.main -threaded -rtsopts
     if impl(ghc >= 7.4)
         ghc-options: "-with-rtsopts=-I0 -qg -qb"
     else
@@ -206,15 +204,14 @@ executable shake
         Development.Make.Type
         Development.Ninja.All
         Run
-
+    default-language: Haskell2010
 
 test-suite shake-test
-    default-language: Haskell2010
     type: exitcode-stdio-1.0
-    ghc-options: -main-is Test.main
     main-is: Test.hs
-    hs-source-dirs: src
-    ghc-options: -threaded -rtsopts
+    hs-source-dirs:
+        src
+    ghc-options: -main-is Test.main -threaded -rtsopts
     build-depends:
         base == 4.*,
         old-time,
@@ -231,8 +228,8 @@ test-suite shake-test
         js-jquery,
         js-flot,
         transformers >= 0.2,
-        deepseq >= 1.1,
         extra >= 1.3,
+        deepseq >= 1.1,
         QuickCheck >= 2.0
 
     if flag(portable)
@@ -251,7 +248,6 @@ test-suite shake-test
         Development.Ninja.Parse
         Development.Ninja.Type
         Run
-        Test.Type
         Test.Assume
         Test.Basic
         Test.Benchmark
@@ -283,7 +279,9 @@ test-suite shake-test
         Test.Tar
         Test.Throttle
         Test.Tup
+        Test.Type
         Test.Unicode
         Test.Util
         Test.Verbosity
         Test.Version
+    default-language: Haskell2010
