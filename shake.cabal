@@ -48,10 +48,30 @@ extra-source-files:
     src/Test/MakeTutor/hellomake.c
     src/Test/MakeTutor/hellomake.h
     src/Test/MakeTutor/Makefile
-    src/Test/Ninja/*.ninja
-    src/Test/Ninja/*.output
-    src/Test/Ninja/subdir/*.ninja
-    src/Test/Progress/*.prog
+    src/Test/Ninja/buildseparate.ninja
+    src/Test/Ninja/compdb.ninja
+    src/Test/Ninja/compdb.output
+    src/Test/Ninja/lint.ninja
+    src/Test/Ninja/nocreate.ninja
+    src/Test/Ninja/outputtouch.ninja
+    src/Test/Ninja/phonyorder.ninja
+    src/Test/Ninja/redefine.ninja
+    src/Test/Ninja/subdir/1.ninja
+    src/Test/Ninja/subdir/2.ninja
+    src/Test/Ninja/test1.ninja
+    src/Test/Ninja/test2.ninja
+    src/Test/Ninja/test3-inc.ninja
+    src/Test/Ninja/test3-sub.ninja
+    src/Test/Ninja/test3.ninja
+    src/Test/Ninja/test4.ninja
+    src/Test/Ninja/test5.ninja
+    src/Test/Ninja/test6-inc.ninja
+    src/Test/Ninja/test6-sub.ninja
+    src/Test/Ninja/test6.ninja
+    src/Test/Progress/progress-nan.prog
+    src/Test/Progress/self-clean-j2.prog
+    src/Test/Progress/self-rebuild-j2.prog
+    src/Test/Progress/self-zero-j2.prog
     src/Test/Tar/list.txt
     src/Test/Tup/hello.c
     src/Test/Tup/newmath/root.cfg
